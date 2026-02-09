@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Happy Valentine's Day! ✨</title>
+    <title>Have a nice day! ✨</title>
     <link href="https://fonts.googleapis.com/css2?family=Mitr:wght@300;500&family=Caveat:wght@700&display=swap" rel="stylesheet">
     <style>
         * { -webkit-tap-highlight-color: transparent; box-sizing: border-box; }
@@ -11,7 +11,7 @@
             margin: 0; padding: 0;
             display: flex; justify-content: center; align-items: center;
             min-height: 100vh;
-            background: #fdf0f4; /* สีชมพูอ่อนมากแบบมินิมอล */
+            background: #fdf0f4;
             font-family: 'Mitr', sans-serif;
             overflow: hidden;
             touch-action: manipulation;
@@ -33,20 +33,21 @@
             margin-bottom: 10px;
         }
 
-        h1 { font-family: 'Caveat', cursive; color: #ff758c; font-size: 2.5rem; margin: 10px 0; }
-        p { color: #666; font-size: 1rem; line-height: 1.5; }
+        h1 { font-family: 'Caveat', cursive; color: #ff758c; font-size: 2.8rem; margin: 10px 0; }
+        p { color: #666; font-size: 1.1rem; line-height: 1.6; }
 
         .btn-valentine {
             background: #ff758c;
             color: white;
             border: none;
-            padding: 15px 35px;
+            padding: 16px 35px;
             border-radius: 50px;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             margin-top: 15px;
             cursor: pointer;
             width: 100%;
             font-weight: 500;
+            transition: 0.3s;
         }
 
         #message {
@@ -54,39 +55,43 @@
             margin-top: 25px;
             color: #444;
             background: #fff5f7;
-            padding: 20px;
+            padding: 25px;
             border-radius: 20px;
             animation: fadeIn 0.8s ease;
+            border: 1px solid #ffe5ec;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; } to { opacity: 1; }
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .floating-heart {
             position: fixed; pointer-events: none; z-index: 1;
-            animation: floatUp 3s linear forwards;
+            animation: floatUp 3.5s linear forwards;
         }
 
         @keyframes floatUp {
-            0% { transform: translateY(0); opacity: 0.8; }
-            100% { transform: translateY(-100vh); opacity: 0; }
+            0% { transform: translateY(0) rotate(0deg); opacity: 0.8; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
         }
     </style>
 </head>
 <body onclick="spawnHeart(event)">
 
     <div class="container">
-        <div class="main-emoji">🥤</div> <h1>Happy Valentine's!</h1>
-        <p>สุขสันต์วันวาเลนไทน์นะ <br> เห็นว่าเป็นวันพิเศษ เลยมีอะไรมาฝาก...</p>
+        <div class="main-emoji">💖</div>
+        <h1>Happy Valentine's</h1>
+        <p>สุขสันต์วันวาเลนไทน์นะ <br> วันนี้มีอะไรอยากบอกนิดนึง...</p>
         
         <button class="btn-valentine" onclick="revealMessage()">ลองเปิดดูสิ</button>
 
         <div id="message">
-            <p style="margin: 0;">
-                <b>"ดีใจนะที่ได้เริ่มคุยกัน <br> 
-                ขอบคุณที่เป็นรอยยิ้มให้กันในวันนี้นะ <br>
-                ขอให้เป็นวันที่ดีของคุณครับ ✨"</b>
+            <p style="margin: 0; font-size: 1.15rem;">
+                <b>"จริงๆ ก็ดีใจนะที่มีเธอให้คุยด้วย <br> 
+                ขอบคุณที่เข้ามาเป็นเรื่องราวดีๆ ของเรา <br>
+                วันนี้ไปเที่ยวไหนก็ขอให้สนุกนะ <br>
+                Have a nice day ครับ! ✨"</b>
             </p>
         </div>
     </div>
@@ -94,19 +99,19 @@
     <script>
         function revealMessage() {
             document.getElementById('message').style.display = 'block';
-            document.querySelector('.btn-valentine').innerText = 'Have a nice day! 😊';
+            document.querySelector('.btn-valentine').style.display = 'none';
         }
 
         function spawnHeart(e) {
             const heart = document.createElement('div');
             heart.classList.add('floating-heart');
-            // สุ่มอิโมจิให้ดูน่ารัก ไม่เลี่ยนเกินไป
-            const emojis = ['✨', '☁️', '🌸', '💖'];
+            const emojis = ['✨', '☁️', '🌸', '💖', '🍭'];
             heart.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
             heart.style.left = (e.clientX || Math.random() * window.innerWidth) + 'px';
             heart.style.top = (e.clientY || window.innerHeight) + 'px';
+            heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
             document.body.appendChild(heart);
-            setTimeout(() => heart.remove(), 3000);
+            setTimeout(() => heart.remove(), 3500);
         }
 
         setInterval(() => {
