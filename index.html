@@ -2,128 +2,198 @@
 <html lang="th">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>I have a question... 👉👈</title>
-    <link href="https://fonts.googleapis.com/css2?family=Mitr:wght@300;500&family=Caveat:wght@700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday! 🎂</title>
     <style>
-        * { -webkit-tap-highlight-color: transparent; box-sizing: border-box; }
+        :root {
+            --bg-color: #fce4ec;
+            --cake-color: #f8bbd0;
+            --frosting-color: #ffffff;
+            --text-color: #880e4f;
+            --accent-color: #ff80ab;
+        }
+
         body {
-            margin: 0; padding: 0;
-            display: flex; justify-content: center; align-items: center;
-            min-height: 100vh;
-            background: linear-gradient(135deg, #ffafbd 0%, #ffc3a0 100%);
-            font-family: 'Mitr', sans-serif;
-            overflow: hidden;
-        }
-
-        .container {
-            text-align: center;
-            background: rgba(255, 255, 255, 0.95);
-            padding: 40px 20px;
-            border-radius: 35px;
-            width: 90%;
-            max-width: 400px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-            z-index: 2;
-        }
-
-        h1 { font-family: 'Caveat', cursive; color: #ff4d6d; font-size: 3rem; margin: 10px 0; }
-        p { color: #555; font-size: 1.1rem; line-height: 1.6; }
-
-        .btn-group {
+            background-color: var(--bg-color);
+            font-family: 'Prompt', sans-serif;
             display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin-top: 25px;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            text-align: center;
         }
 
-        .btn {
-            border: none;
-            padding: 18px;
-            border-radius: 50px;
-            font-size: 1.3rem;
-            font-weight: 500;
+        /* ส่วนหน้าแรก: เค้ก */
+        #cake-section {
+            transition: opacity 1s ease-out;
             cursor: pointer;
-            transition: 0.3s;
-            font-family: 'Mitr', sans-serif;
         }
 
-        .btn-yes {
-            background: #ff4d6d;
-            color: white;
-            box-shadow: 0 8px 20px rgba(255, 77, 109, 0.3);
+        .cake {
+            position: relative;
+            width: 200px;
+            height: 150px;
+            background: var(--cake-color);
+            border-radius: 20px 20px 10px 10px;
+            margin: 0 auto;
+            box-shadow: 0 10px 0 #f06292;
         }
 
-        .btn-yes:active { transform: scale(0.95); }
+        .frosting {
+            position: absolute;
+            top: -10px;
+            width: 100%;
+            height: 40px;
+            background: var(--frosting-color);
+            border-radius: 20px;
+            display: flex;
+            justify-content: space-around;
+        }
 
-        #success-message {
+        .candle {
+            position: absolute;
+            bottom: 150px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 15px;
+            height: 50px;
+            background: #fff9c4;
+            border-top: 5px solid #ffeb3b;
+        }
+
+        .flame {
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 15px;
+            height: 25px;
+            background: #ffeb3b;
+            border-radius: 50% 50% 20% 20%;
+            box-shadow: 0 0 15px #ffeb3b;
+            animation: flicker 0.1s infinite alternate;
+        }
+
+        @keyframes flicker {
+            from { transform: translateX(-50%) scale(1); }
+            to { transform: translateX(-50%) scale(1.1); }
+        }
+
+        /* ส่วนคำอวยพร (ซ่อนไว้ตอนแรก) */
+        #wish-section {
             display: none;
-            animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            opacity: 0;
+            transition: opacity 1.5s ease-in;
         }
 
-        @keyframes popIn {
-            0% { transform: scale(0.5); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
-        }
+        h1 { color: var(--text-color); font-size: 2.5rem; }
+        p { color: #ad1457; font-size: 1.2rem; }
 
-        .floating-heart {
-            position: fixed; pointer-events: none; z-index: 1;
-            animation: floatUp 3s linear forwards;
-        }
+        .hidden { display: none !important; }
+        .fade-in { display: block !important; opacity: 1 !important; }
 
-        @keyframes floatUp {
-            0% { transform: translateY(0); opacity: 1; }
-            100% { transform: translateY(-100vh); opacity: 0; }
+        .status-msg {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #d81b60;
+            background: rgba(255,255,255,0.5);
+            padding: 5px 15px;
+            border-radius: 20px;
         }
     </style>
 </head>
-<body onclick="spawnHeart(event)">
+<body>
 
-    <div class="container" id="main-card">
-        <div style="font-size: 60px;">💌</div>
-        <h1>Be my Valentine?</h1>
-        <p>คุยกันมาสักพักแล้ว เรารู้สึกดีมากๆ เลย <br> วาเลนไทน์ปีนี้...</p>
-        <p style="font-size: 1.4rem; color: #ff4d6d; font-weight: 500;">"เป็นแฟนกับเรานะ?"</p>
-        
-        <div class="btn-group">
-            <button class="btn btn-yes" onclick="showSuccess()">ตกลงสิ 😊</button>
-            <button class="btn btn-yes" onclick="showSuccess()">แน่นอนอยู่แล้ว ❤️</button>
+    <div id="cake-section">
+        <div class="candle">
+            <div class="flame" id="flame"></div>
         </div>
+        <div class="cake">
+            <div class="frosting"></div>
+        </div>
+        <p class="status-msg" id="status">คลิกที่เค้กเพื่อเริ่มใช้ไมโครโฟน 🎙️</p>
     </div>
 
-    <div class="container" id="success-message">
-        <div style="font-size: 80px;">🎉</div>
-        <h1>เย้! ขอบคุณนะ</h1>
-        <p style="font-size: 1.2rem;">สัญญาว่าจะดูแลอย่างดีเลย <br> ฝากเนื้อฝากตัวด้วยนะแฟนคนเก่ง ✨</p>
-        <p style="color: #ff4d6d;">Happy Valentine's Day!</p>
+    <div id="wish-section">
+        <h1>✨ Happy Birthday! ✨</h1>
+        <p>ขอให้มีความสุขมากๆ สุขภาพแข็งแรง<br>สมปรารถนาในทุกเรื่องเลยนะ!</p>
+        <div style="font-size: 50px;">🎂🎁🎉</div>
     </div>
 
     <script>
-        function showSuccess() {
-            document.getElementById('main-card').style.display = 'none';
-            document.getElementById('success-message').style.display = 'block';
-            
-            // พ่นหัวใจรัวๆ
-            for(let i=0; i<30; i++) {
-                setTimeout(() => spawnHeart({clientX: Math.random() * window.innerWidth, clientY: window.innerHeight}), i * 100);
+        const cakeSection = document.getElementById('cake-section');
+        const wishSection = document.getElementById('wish-section');
+        const flame = document.getElementById('flame');
+        const statusText = document.getElementById('status');
+        
+        let audioContext;
+        let analyser;
+        let microphone;
+        let isBlown = false;
+
+        // ฟังก์ชันเริ่มฟังเสียง
+        async function startMic() {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                analyser = audioContext.createAnalyser();
+                microphone = audioContext.createMediaStreamSource(stream);
+                
+                analyser.fftSize = 256;
+                microphone.connect(analyser);
+                
+                statusText.innerText = "จ่อที่ไมค์แล้วเป่าแรงๆ เลย! 🌬️";
+                detectBlow();
+            } catch (err) {
+                statusText.innerText = "กรุณาอนุญาตการใช้ไมโครโฟนเพื่อเป่าเค้ก";
+                console.error(err);
             }
         }
 
-        function spawnHeart(e) {
-            const heart = document.createElement('div');
-            heart.classList.add('floating-heart');
-            const emojis = ['❤️', '💖', '✨', '🌹', '🥰'];
-            heart.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
-            heart.style.left = (e.clientX || Math.random() * window.innerWidth) + 'px';
-            heart.style.top = (e.clientY || window.innerHeight) + 'px';
-            heart.style.fontSize = (Math.random() * 20 + 20) + 'px';
-            document.body.appendChild(heart);
-            setTimeout(() => heart.remove(), 3000);
+        function detectBlow() {
+            if (isBlown) return;
+
+            const bufferLength = analyser.frequencyBinCount;
+            const dataArray = new Uint8Array(bufferLength);
+            analyser.getByteFrequencyData(dataArray);
+
+            // คำนวณความดังเฉลี่ย
+            let sum = 0;
+            for (let i = 0; i < bufferLength; i++) {
+                sum += dataArray[i];
+            }
+            let average = sum / bufferLength;
+
+            // ถ้าเสียงดังเกินระดับที่กำหนด (เป่าแรงพอ)
+            if (average > 60) { 
+                extinguishCandle();
+            } else {
+                requestAnimationFrame(detectBlow);
+            }
         }
 
-        setInterval(() => {
-            spawnHeart({clientX: Math.random() * window.innerWidth, clientY: window.innerHeight + 50});
-        }, 600);
+        function extinguishCandle() {
+            isBlown = true;
+            flame.style.display = 'none'; // ดับเทียน
+            statusText.innerText = "สำเร็จแล้ว! ✨";
+
+            setTimeout(() => {
+                cakeSection.style.opacity = '0';
+                setTimeout(() => {
+                    cakeSection.classList.add('hidden');
+                    wishSection.classList.add('fade-in');
+                }, 1000);
+            }, 500);
+        }
+
+        // เริ่มต้นเมื่อคลิก
+        cakeSection.addEventListener('click', () => {
+            if (!audioContext) {
+                startMic();
+            }
+        });
     </script>
 </body>
 </html>
