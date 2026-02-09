@@ -2,238 +2,128 @@
 <html lang="th">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday! 🎂</title>
-    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;600&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>I have a question... 👉👈</title>
+    <link href="https://fonts.googleapis.com/css2?family=Mitr:wght@300;500&family=Caveat:wght@700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --bg: #fff5f8;
-            --cake-pink: #ffc1e3;
-            --cake-dark: #f48fb1;
-            --cream: #ffffff;
-            --candle: #fff176;
-            --text: #ad1457;
-        }
-
+        * { -webkit-tap-highlight-color: transparent; box-sizing: border-box; }
         body {
-            background-color: var(--bg);
-            font-family: 'Prompt', sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
+            margin: 0; padding: 0;
+            display: flex; justify-content: center; align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #ffafbd 0%, #ffc3a0 100%);
+            font-family: 'Mitr', sans-serif;
             overflow: hidden;
         }
 
-        /* Container หลัก */
         .container {
-            position: relative;
             text-align: center;
-            width: 100%;
-            max-width: 500px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px 20px;
+            border-radius: 35px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            z-index: 2;
         }
 
-        /* --- ดีไซน์เค้ก --- */
-        .cake-wrapper {
-            position: relative;
-            height: 300px;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
+        h1 { font-family: 'Caveat', cursive; color: #ff4d6d; font-size: 3rem; margin: 10px 0; }
+        p { color: #555; font-size: 1.1rem; line-height: 1.6; }
 
-        .cake-wrapper:hover { transform: scale(1.02); }
-
-        .cake-body {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        /* ชั้นเค้ก */
-        .tier {
-            background: var(--cake-pink);
-            margin: 0 auto;
-            border-radius: 15px 15px 5px 5px;
-            position: relative;
-            border-bottom: 6px solid var(--cake-dark);
-        }
-        .tier-1 { width: 220px; height: 80px; z-index: 1; }
-        .tier-2 { width: 160px; height: 70px; z-index: 2; margin-bottom: -10px; }
-        .tier-3 { width: 100px; height: 60px; z-index: 3; margin-bottom: -10px; }
-
-        /* ครีมย้อย */
-        .drip {
-            position: absolute;
-            top: 0; left: 10%; width: 80%; height: 20px;
-            background: var(--cream);
-            border-radius: 0 0 20px 20px;
-        }
-
-        /* --- เทียน --- */
-        .candles-container {
-            position: absolute;
-            top: -45px;
-            left: 50%;
-            transform: translateX(-50%);
+        .btn-group {
             display: flex;
+            flex-direction: column;
             gap: 15px;
-            z-index: 10;
+            margin-top: 25px;
         }
 
-        .candle {
-            width: 10px;
-            height: 40px;
-            background: linear-gradient(to bottom, #fff, var(--candle));
-            border-radius: 3px;
-            position: relative;
-        }
-
-        .flame {
-            position: absolute;
-            top: -18px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 12px;
-            height: 18px;
-            background: #ffeb3b;
-            border-radius: 50% 50% 35% 35%;
-            box-shadow: 0 0 15px #ffd600;
-            animation: flicker 0.2s infinite alternate;
-        }
-
-        @keyframes flicker {
-            from { transform: translateX(-50%) scale(1) rotate(-2deg); }
-            to { transform: translateX(-50%) scale(1.1) rotate(2deg); }
-        }
-
-        /* --- สถานะและข้อความ --- */
-        #status {
-            margin-top: 40px;
-            color: var(--text);
-            font-weight: 600;
-            background: #fff;
-            padding: 10px 20px;
+        .btn {
+            border: none;
+            padding: 18px;
             border-radius: 50px;
-            display: inline-block;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            font-size: 1.3rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.3s;
+            font-family: 'Mitr', sans-serif;
         }
 
-        #wish-section {
+        .btn-yes {
+            background: #ff4d6d;
+            color: white;
+            box-shadow: 0 8px 20px rgba(255, 77, 109, 0.3);
+        }
+
+        .btn-yes:active { transform: scale(0.95); }
+
+        #success-message {
             display: none;
-            opacity: 0;
-            transition: all 1s ease;
+            animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        .wish-card {
-            background: white;
-            padding: 40px;
-            border-radius: 30px;
-            box-shadow: 0 20px 40px rgba(244, 143, 177, 0.2);
+        @keyframes popIn {
+            0% { transform: scale(0.5); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
         }
 
-        h1 { color: var(--text); font-size: 2.2rem; margin: 0; }
-        .fade-in { display: block !important; opacity: 1 !important; transform: translateY(-20px); }
-        .hidden { display: none !important; }
+        .floating-heart {
+            position: fixed; pointer-events: none; z-index: 1;
+            animation: floatUp 3s linear forwards;
+        }
 
+        @keyframes floatUp {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-100vh); opacity: 0; }
+        }
     </style>
 </head>
-<body>
+<body onclick="spawnHeart(event)">
 
-    <div class="container">
-        <div id="cake-section">
-            <div class="cake-wrapper" id="cake-tap">
-                <div class="cake-body">
-                    <div class="candles-container">
-                        <div class="candle"><div class="flame"></div></div>
-                        <div class="candle"><div class="flame"></div></div>
-                        <div class="candle"><div class="flame"></div></div>
-                    </div>
-                    
-                    <div class="tier tier-3"><div class="drip"></div></div>
-                    <div class="tier tier-2"><div class="drip"></div></div>
-                    <div class="tier tier-1"><div class="drip"></div></div>
-                </div>
-            </div>
-            <div id="status">👆 กดที่เค้กเพื่อเริ่มใช้ไมค์</div>
-        </div>
-
-        <div id="wish-section">
-            <div class="wish-card">
-                <h1>💖 Happy Birthday! 💖</h1>
-                <p style="color: #666; line-height: 1.6;">
-                    ขอให้ปีนี้เป็นปีที่ใจดีกับเธอ<br>
-                    พบเจอแต่เรื่องราวดีๆ และรอยยิ้มในทุกวันนะ
-                </p>
-                <div style="font-size: 40px; margin-top: 20px;">🎉 🎁 🎂</div>
-            </div>
+    <div class="container" id="main-card">
+        <div style="font-size: 60px;">💌</div>
+        <h1>Be my Valentine?</h1>
+        <p>คุยกันมาสักพักแล้ว เรารู้สึกดีมากๆ เลย <br> วาเลนไทน์ปีนี้...</p>
+        <p style="font-size: 1.4rem; color: #ff4d6d; font-weight: 500;">"เป็นแฟนกับเรานะ?"</p>
+        
+        <div class="btn-group">
+            <button class="btn btn-yes" onclick="showSuccess()">ตกลงสิ 😊</button>
+            <button class="btn btn-yes" onclick="showSuccess()">แน่นอนอยู่แล้ว ❤️</button>
         </div>
     </div>
 
+    <div class="container" id="success-message">
+        <div style="font-size: 80px;">🎉</div>
+        <h1>เย้! ขอบคุณนะ</h1>
+        <p style="font-size: 1.2rem;">สัญญาว่าจะดูแลอย่างดีเลย <br> ฝากเนื้อฝากตัวด้วยนะแฟนคนเก่ง ✨</p>
+        <p style="color: #ff4d6d;">Happy Valentine's Day!</p>
+    </div>
+
     <script>
-        const cakeTap = document.getElementById('cake-tap');
-        const cakeSection = document.getElementById('cake-section');
-        const wishSection = document.getElementById('wish-section');
-        const flames = document.querySelectorAll('.flame');
-        const statusText = document.getElementById('status');
-        
-        let audioContext;
-        let analyser;
-        let isBlown = false;
-
-        async function startMic() {
-            try {
-                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-                audioContext = new (window.AudioContext || window.webkitAudioContext)();
-                analyser = audioContext.createAnalyser();
-                const microphone = audioContext.createMediaStreamSource(stream);
-                
-                analyser.fftSize = 512;
-                microphone.connect(analyser);
-                
-                statusText.innerText = "จ่อไมค์แล้วเป่าแรงๆ เลย! 🌬️";
-                detectBlow();
-            } catch (err) {
-                statusText.innerText = "❌ ไม่สามารถเข้าถึงไมค์ได้";
+        function showSuccess() {
+            document.getElementById('main-card').style.display = 'none';
+            document.getElementById('success-message').style.display = 'block';
+            
+            // พ่นหัวใจรัวๆ
+            for(let i=0; i<30; i++) {
+                setTimeout(() => spawnHeart({clientX: Math.random() * window.innerWidth, clientY: window.innerHeight}), i * 100);
             }
         }
 
-        function detectBlow() {
-            if (isBlown) return;
-
-            const dataArray = new Uint8Array(analyser.frequencyBinCount);
-            analyser.getByteFrequencyData(dataArray);
-
-            let sum = 0;
-            for (let i = 0; i < dataArray.length; i++) sum += dataArray[i];
-            let average = sum / dataArray.length;
-
-            // ตรวจจับเสียงเป่า (ปรับค่าความไวที่ 55-70)
-            if (average > 65) { 
-                extinguish();
-            } else {
-                requestAnimationFrame(detectBlow);
-            }
+        function spawnHeart(e) {
+            const heart = document.createElement('div');
+            heart.classList.add('floating-heart');
+            const emojis = ['❤️', '💖', '✨', '🌹', '🥰'];
+            heart.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+            heart.style.left = (e.clientX || Math.random() * window.innerWidth) + 'px';
+            heart.style.top = (e.clientY || window.innerHeight) + 'px';
+            heart.style.fontSize = (Math.random() * 20 + 20) + 'px';
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 3000);
         }
 
-        function extinguish() {
-            isBlown = true;
-            flames.forEach(f => f.style.display = 'none');
-            statusText.innerText = "เย้! เป่าดับแล้ว ✨";
-
-            setTimeout(() => {
-                cakeSection.style.opacity = '0';
-                setTimeout(() => {
-                    cakeSection.classList.add('hidden');
-                    wishSection.classList.add('fade-in');
-                }, 800);
-            }, 1000);
-        }
-
-        cakeTap.addEventListener('click', () => {
-            if (!audioContext) startMic();
-        });
+        setInterval(() => {
+            spawnHeart({clientX: Math.random() * window.innerWidth, clientY: window.innerHeight + 50});
+        }, 600);
     </script>
 </body>
 </html>
